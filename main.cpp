@@ -1,5 +1,4 @@
 #include <iostream>
-#include <assert.h>
 
 #include "generator.h"
 #include "hackedgenerator.h"
@@ -12,10 +11,15 @@ uint64_t constexpr TEST2_RESULT = 234862488;
 auto constexpr FAILED_MSG = "FAILED\n";
 auto constexpr PASSED_MSG = "PASSED\n";
 
+using namespace LCG;
+
 int main(int /*argc*/, char** /*argv*/) {
+
     LCG::Generator generator;
+    uint64_t t;
     for (uint64_t i = 0; i < TEST1; ++i) {
-        if (generator.next() != LCG::HackedGenerator::get(i)) {
+        t = generator.next();
+        if (t != LCG::HackedGenerator::get(i)) {
             std::cout << FAILED_MSG;
             return 0;
         }
